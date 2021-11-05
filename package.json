@@ -1,0 +1,25 @@
+{
+  "name": "fwb13naguruabdur",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "^4.3.2",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "mongodb": "^4.1.4",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "description": "this is my installation ",
+  "main": "app.js",
+  "keywords": [
+    "C:\\Users\\S544913\\Documents\\GitHub\\fwb13naguruabdur"
+  ],
+  "author": "REHAMAN NAGURU ABDUR",
+  "license": "ISC"
+}

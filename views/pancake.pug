@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the Pancake pug
+   div(class="container-fluid")
+        div(class="row")
+            -
+                let pancake = [
+                    {
+                        "Itemname": "Choclate Pancake",
+                        "Quantity": 2,
+                        "price": 10
+                    },
+                    {
+                        "Itemname": "Strawberry Pancake",
+                        "Quantity": 3,
+                        "price": 12.40
+                    },
+                    {
+                        "Itemname": "Blueberry Pancake",
+                        "Quantity": 1,
+                        "price": 9.45
+                    },                   
+                ]
+            each v,index in pancake
+                table(style='width:100%', border='1')
+                  tr 
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.Itemname}
+                    br
+                    br
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.Quantity}
+                    br
+                    br
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.price}
+  script.                
+        function buy(index_num)
+        {
+              alert(`You Purchased Pancake ${index_num + 1}`)
+        }
+

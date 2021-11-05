@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p REHAMAN'S Index page
+
+  button(type="button", class="btn btn-success", onclick="update()") Press Me
+  br
+  br
+  div(id = "target") 
+    b Display
+  
+  script.  
+   var client_count=0;
+     function update() {
+       client_count++;
+       document.getElementById("target").innerHTML=`Value now ${client_count}`;
+     }

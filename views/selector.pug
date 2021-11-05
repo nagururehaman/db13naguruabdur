@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} Js
+  p Rehaman's Images page
+  p Displaying of 3 different images of every time you load the page
+  br
+  br
+  - var image_names= ["strawberry.jpg","chocolate.jpg","blueberry.jpg","pancake.jpg","pancake2.jpg"]            
+    -for(let i=0;i<3;i++){
+        - let randnum=Math.floor(Math.random()*5)
+            img(src= `/images/${image_names[randnum]}` alt="image", height="300", width="300")
+        -}
