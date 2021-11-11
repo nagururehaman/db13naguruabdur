@@ -9,9 +9,24 @@ var usersRouter = require('./routes/users');
 var pancakeRouter = require('./routes/pancake');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
-var pancakeModels = require('./models/pancake');
+var Costume = require("./models/costume"); 
 
 var app = express();
+const connectionString = process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,  
+{useNewUrlParser: true, 
+useUnifiedTopology: true}); 
+
+
+//Get the default connection 
+var db = mongoose.connection; 
+ 
+//Bind connection to error event  
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){ 
+ console.log("Connection to DB succeeded")}); 
+ recreateDB();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,15 +43,14 @@ app.use('/users', usersRouter);
 app.use('/pancake', pancakeRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
-app.use('/pancake', pancakeModels);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -48,51 +62,43 @@ app.use(function (err, req, res, next) {
 
 module.exports = app;
 
-const connectionString =
-  process.env.MONGO_CON
-mongoose = require('mongoose');
-mongoose.connect(connectionString,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
+module.exports = app;
 
-//Get the default connection 
-var db = mongoose.connection;
-//Bind connection to error event  
-db.on('error', console.error.bind(console, 'MongoDB connection error: '));
-db.once("open", function () {
-  console.log("Connection to DB succeeded")
-});
+async function recreateDB(){
 
+  // Delete everything
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var phramacyRouter = require('./routes/pancake');
-var addmodsRouter = require('./routes/addmods');
-var selectorRouter = require('./routes/selector');
-var Costume = require("./models/pancake");
-
-
-// We can seed the collection if needed on server start async function recreateDB(){
-async function recreateDB() {
-  // Delete everything 
   await Costume.deleteMany();
-  let instance1 = new Costume({ costume_type: "Tiger", size: 'Medium', cost: 16.4 });
-  instance1.save(function (err, doc) {
-    if (err) return console.error(err);
-    console.log("First object saved")
+
+  let instance1 = new  Costume({costume_type:"ghost", size:'small',cost:26.4});
+
+  let instance2 = new  Costume({costume_type:"spider", size:'large',cost:67.4});
+
+  let instance3 = new Costume({costume_type:"badman", size:'medium',cost:66.4});
+
+  instance1.save( function(err,doc) {
+
+  if(err) return console.error(err);
+
+  console.log("First object saved")
+
   });
-  let instance2 = new Costume({ costume_type: "IndiaKurta", size: 'Large', cost: 20.2 });
-  instance2.save(function (err, doc) {
-    if (err) return console.error(err);
-    console.log("Second object saved")
+
+  instance2.save( function(err,doc) {
+
+  if(err) return console.error(err);
+
+  console.log("second object saved")
+
   });
-  let instance3 = new Costume({ costume_type: "Suit", size: 'Medium', cost: 29.3 });
-  instance3.save(function (err, doc) {
-    if (err) return console.error(err);
-    console.log("Third object saved")
-  });
-}
-let reseed = true;
-if (reseed) { recreateDB(); }
+
+  instance3.save( function(err,doc) {
+
+  if(err) return console.error(err);
+
+  console.log("third object saved")
+
+    });
+
+ }
+
