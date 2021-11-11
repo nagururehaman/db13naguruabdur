@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var pancakeRouter = require('./routes/pancake');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var pancakeModels = require('./models/pancake');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/pancake', pancakeRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/pancake', pancakeModels);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -69,7 +71,7 @@ var usersRouter = require('./routes/users');
 var phramacyRouter = require('./routes/pancake');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
-var Costume = require("./models/costume");
+var Costume = require("./models/pancake");
 
 
 // We can seed the collection if needed on server start async function recreateDB(){
