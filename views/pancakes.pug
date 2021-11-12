@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1= title
+    - let list = results 
+    table(class="table table-stripped table-bordered")
+        thead 
+            tr 
+                td pancake Type
+                td price 
+                td quantity 
+        tbody 
+            each item in list 
+                tr
+                    td #{item.pancake_type}
+                    td #{item.price}
+                    td #{item.quantity} 
