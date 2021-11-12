@@ -1,9 +1,9 @@
 var express = require('express');
+const pancake_controlers= require('../controller/pancake');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('pancake', { title: 'Search Results for pancakes' });
-});
-
+/* GET costumes */
+router.get('/', pancake_controlers.pancake_view_all_Page );
+router.get('/pancakes/:id', pancake_controlers.pancake_detail); 
+// PUT request to update pancake.
+router.put('/pancakes/:id',pancake_controlers.pancake_update_put);
 module.exports = router;
