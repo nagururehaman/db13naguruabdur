@@ -62,7 +62,7 @@ app.use('/pancake', pancakeRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/pancake', pancake);
-app.use('/pancake', pancake);
+app.use('/pancakes', pancake);
 
 app.use('/resource', resourceRouter);
 

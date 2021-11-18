@@ -1,5 +1,5 @@
 var pancake = require('../models/pancake');
-// List of all Costumes
+// List of all pancakes
 
 exports.pancake_list = async function(req, res) {
     try{
@@ -29,7 +29,7 @@ exports.pancake_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"pancake_type":"goat", "cost":12, "size":"large"}
     document.pancake_type = req.body.pancake_type;
     document.price = req.body.price;
     document.quantity = req.body.quantity;
@@ -42,10 +42,18 @@ exports.pancake_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
-// Handle pancake delete form on DELETE.
-exports.pancake_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: pancake delete DELETE ' + req.params.id);
-};
+// Handle pancake delete on DELETE.
+exports.pancake_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await pancake.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
 // Handle pancake update form on PUT.
 exports.pancake_update_put = async function(req, res) {
  //res.send('NOT IMPLEMENTED: pancake update PUT' + req.params.id);
@@ -72,23 +80,25 @@ exports.pancake_update_put = async function(req, res) {
 };
 exports.pancake_view_all_Page = async function(req, res) {
     try{
-    theCostumes = await pancake.find();
-    res.render('pancakes', { title: 'pancake Search Results', results: theCostumes });
+    thepancakes = await pancake.find();
+    res.render('pancakes', { title: 'pancake Search Results', results: thepancakes });
     }
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
    }; 
-// Handle Costume delete on DELETE.
-exports.costume_delete = async function(req, res) {
-    console.log("delete " + req.params.id)
-    try {
-    result = await Costume.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
-    } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
-    }
-   };
+
+   // Handle a show one view with id specified by query 
+exports.pancake_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await pancake.findById( req.query.id) 
+        res.render('pancakedetail',  
+{ title: 'pancake Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
