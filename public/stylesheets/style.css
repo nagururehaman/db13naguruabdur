@@ -10,4 +10,33 @@ a {
 .pancakeAttr { 
   background-color: aquamarine; 
   width: 120px; 
+  
 } 
+
+.pancake1 {
+  border: 2px solid powderblue;
+
+
+background-color: powderblue;
+}
+
+.pancake2 {
+  border: 2px solid rgb(211, 18, 18);
+
+
+background-color: rgb(236, 13, 32);
+}
+
+.pancake3 {
+  border: 2px solid rgb(30, 7, 238);
+
+
+background-color: rgb(73, 12, 240);
+}
+
+.pancake4 {
+  border: 2px solid rgb(248, 6, 188);
+
+
+background-color: rgb(248, 7, 176);
+}

@@ -1,0 +1,59 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let pancakeid = toShow._id 
+    - let pancake_type = toShow.pancake_type 
+    - let pancakeprice = toShow.price 
+    - let pancakequantity = toShow.quantity 
+    - let actionid = "/resource/pancakes/" + pancakeid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='pancake1 mr-3') pancake ID is: 
+        div #{pancakeid} 
+      div.row 
+        div(class='pancake2 mr-3') pancake Type is: 
+        div #{pancake_type} 
+      div.row 
+        div(class='pancake3 mr-3') pancake quantity is: 
+        div #{pancakequantity} 
+      div.row 
+        div(class='pancake4 mr-3') pancake price is: 
+        div #{pancakeprice} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+    body
+     h3 I have Improved the Delete Page
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the pancake collection 
+      window.location.href='/pancakes' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      // Dont need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/pancakes' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    }
+
+  
+    
+     

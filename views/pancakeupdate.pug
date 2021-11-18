@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  - let pancakeid = toShow._id 
+  - let pancake_type = toShow.pancake_type 
+  - let pancakeprice = toShow.price 
+  - let pancakequantity = toShow.quantity 
+
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{pancakeid} 
+  - let actionid = "/resource/pancakes/" + pancakeid 
+
+  form(id='pancakeForm', action=actionid, method="PUT") 
+    div.form-group 
+        label.pancakeAttr(for='pancake_type') pancake type 
+        input#pancake_type(type='text', name='pancake_type', value= pancake_type) 
+    div.form-group 
+        label.pancakeAttr(for='quantity') pancake quantity 
+        input#quantity(type='text', name='quantity', value= pancakequantity) 
+    div.form-group 
+        label.pancakeAttr(for='price') pancake price 
+        input#price(type='number', name='price', value= pancakeprice) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['pancakeForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    });
