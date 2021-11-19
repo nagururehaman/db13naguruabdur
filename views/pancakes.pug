@@ -2,16 +2,25 @@ extends layout
 
 block content
     h1= title
-    - let list = results 
+    - let items = results 
     table(class="table table-stripped table-bordered")
         thead 
             tr 
+                td Item ID
                 td pancake Type
                 td price 
                 td quantity 
         tbody 
-            each item in list 
+            each item in items 
                 tr
+                    td #{item._id}
                     td #{item.pancake_type}
                     td #{item.price}
                     td #{item.quantity} 
+                    td 
+                      button.btn( class="btn-primary ml-1",onclick=`dispatch(\"/pancake/update/?id=${item._id}\")`) update 
+                script. 
+                  function dispatch(path){ 
+                    window.location.href=path 
+                  }
+                 
