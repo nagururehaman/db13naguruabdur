@@ -2,6 +2,7 @@ extends layout
 
 block content
     h1= title
+    a(href = "pancake/create" class="btn btn-danger col-sm-2") Create
     - let items = results 
     table(class="table table-stripped table-bordered")
         thead 
@@ -19,8 +20,19 @@ block content
                     td #{item.quantity} 
                     td 
                       button.btn( class="btn-primary ml-1",onclick=`dispatch(\"/pancake/update/?id=${item._id}\")`) update 
+                      button.btn(class="btn-danger m-1", onclick=`deleteOnid(\"/pancake/delete/?id=${item._id}\")`) Delete 
+                      button.btn(class="btn-secondary m-1", onclick=`detail(\"/pancake/detail/?id=${item._id}\")`) detail
                 script. 
                   function dispatch(path){ 
                     window.location.href=path 
+                  }
+                script. 
+                  function detail(path1) { 
+                    // Go back to the home page for the costume collection 
+                    window.location.href=path1
+                  } 
+                script. 
+                  function deleteOnid(path2) { 
+                    window.location.href=path2
                   }
                  

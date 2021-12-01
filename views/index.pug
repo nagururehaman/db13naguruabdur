@@ -1,21 +1,33 @@
-extends layout
+//- extends layout
 
-block content
-  h1= title
-  p REHAMAN'S Index page
+//- block content
+//-   h1= title
+//-   p REHAMAN'S Index page
 
-  button(type="button", class="btn btn-success", onclick="update()") Press Me
-  br
-  br
-  div(id = "target") 
-    b Display
-  a(href = '/pancake') Click for Pankcake Store
-  br
-  br
+//-   button(type="button", class="btn btn-success", onclick="update()") Press Me
+//-   br
+//-   br
+//-   div(id = "target") 
+//-     b Display
+//-   a(href = '/pancake') Click for Pankcake Store
+//-   br
+//-   br
   
-  script.  
-   var client_count=0;
-     function update() {
-       client_count++;
-       document.getElementById("target").innerHTML=`Value now ${client_count}`;
-     }
+//-   script.  
+//-    var client_count=0;
+//-      function update() {
+//-        client_count++;
+//-        document.getElementById("target").innerHTML=`Value now ${client_count}`;
+//-      }
+
+extends layout
+block content
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+ if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/pancakes") Take me to pancakes
+  br
+  a(href="/logout") Logout
